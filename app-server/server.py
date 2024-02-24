@@ -4,7 +4,8 @@
 from flask import Flask
 import datetime
 from flask_cors import CORS, cross_origin
- 
+from controllers.gemini_controller import query_model
+
 x = datetime.datetime.now()
  
 # Initializing flask app
@@ -21,7 +22,14 @@ def get_time():
         "programming":"python"
         }
  
-     
+@app.route('/questions')
+@cross_origin(origin='*')
+def get_questions():
+    # Returning an api for showing in  reactjs
+
+    result = query_model("Can you make a behavioral interview question?").text
+    return result
+
 # Running app
 if __name__ == '__main__':
     CORS(app)

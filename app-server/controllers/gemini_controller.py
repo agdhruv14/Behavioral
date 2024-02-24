@@ -1,20 +1,7 @@
-import os
+from models.gemini_initializer import initialize_model
 
-import google.generativeai as genai
-
-# Using `GOOGLE_API_KEY` environment variable.
-GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
-genai.configure(api_key=GOOGLE_API_KEY)
-
-# Checking for all available models with generateContent feature
-for model in genai.list_models():
-    if "generateContent" in model.supported_generation_methods:
-        print(model.name)
-
-# Initiate the Model
-model = genai.GenerativeModel(model_name="gemini-pro")
-
+model = initialize_model()
 # Query the Model
-response = model.generate_content("Can you generate behavioural interview questions?")
-
-print(response.text)
+def query_model(input_data):
+    response = model.generate_content(input_data)
+    return response
