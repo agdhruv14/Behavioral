@@ -25,8 +25,9 @@ def get_time():
 @app.route('/questions')
 @cross_origin(origin='*')
 def get_questions():
-    result = query_model("Can you make one behavioral interview question?").text
-    return result
+    result = query_model("Can you make a behavioral interview question?").text
+    text_dict = {"Question": result}
+    return text_dict
 
 # Running app
 if __name__ == '__main__':

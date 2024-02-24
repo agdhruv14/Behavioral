@@ -9,8 +9,9 @@ const AudioRecorder = () => {
     const [stream, setStream] = useState(null);
     const [audioChunks, setAudioChunks] = useState([]);
     const [audioURL, setAudioURL] = useState(null);
+    
+    //Audio Playing
     const [value,setValue] = useState(0);
-
     useEffect(()=> {
         Play();
     }, [value]);
@@ -66,10 +67,6 @@ const AudioRecorder = () => {
             document.body.removeChild(a);
             URL.revokeObjectURL(audioUrl);
             setAudioChunks([]);
-            //add code to send it to server
-
-
-
         };
     };
 
