@@ -33,7 +33,7 @@ const App = () => {
             <div>
                 <AudioRecorder />
                 <p>{data.Question}</p>    
-                <p>{question}</p>            
+                {/* <p>{question}</p>             */}
             </div>
         </div>
     );

@@ -59,12 +59,23 @@ const AudioRecorder = () => {
             const audioBlob = new Blob(audioChunks, { type: mimeType });
             const audioUrl = URL.createObjectURL(audioBlob);
             setAudioURL(audioUrl);
-            const a = document.createElement("a");
-            a.href = audioUrl;
-            a.download = "recording.webm"; 
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
+            // const a = document.createElement("a");
+            // a.href = audioUrl;
+            // a.download = "recording.webm"; 
+            // document.body.appendChild(a);
+            // a.click();
+            // document.body.removeChild(a);
+            let data = new FormData();
+            data.append('wavfile', audioBlob, "recording.wav");
+    
+            const config = {
+                headers: {'content-type': 'multipart/form-data'}
+            }
+            fetch('http://localhost:8080/analyze', {
+                method: "POST",
+                body: data,
+              }).then((res) => console.log(res.data));;
+    
             URL.revokeObjectURL(audioUrl);
             setAudioChunks([]);
         };
