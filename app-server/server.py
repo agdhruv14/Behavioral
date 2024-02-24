@@ -28,7 +28,8 @@ def get_questions():
     # Returning an api for showing in  reactjs
 
     result = query_model("Can you make a behavioral interview question?").text
-    return result
+    text_dict = {"Question": result}
+    return text_dict
 
 # Running app
 if __name__ == '__main__':
