@@ -25,9 +25,7 @@ def get_time():
 @app.route('/questions')
 @cross_origin(origin='*')
 def get_questions():
-    # Returning an api for showing in  reactjs
-
-    result = query_model("Can you make a behavioral interview question?").text
+    result = query_model("Can you make one behavioral interview question?").text
     return result
 
 # Running app
