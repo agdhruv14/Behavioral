@@ -10,15 +10,37 @@ const AudioRecorder = () => {
     const [audioChunks, setAudioChunks] = useState([]);
     const [audioURL, setAudioURL] = useState(null);
     
+    
+    const [data, setdata] = useState({
+        question: "check"
+    });
+    
     //Audio Playing
     const [value,setValue] = useState(0);
     useEffect(()=> {
-        Play();
+        if (value > 0) {
+            Show();
+            Play();
+        }
     }, [value]);
 
     const Play=() => {
         new Audio(audio).play();
     };
+
+    //function for showing
+    const Show=() => {
+        fetch("http://127.0.0.1:8080/questions", {
+            mode: "cors"
+        }).then((res) => {
+            return res.json();
+        })
+        .then((responseData) => {
+            setdata({
+                question: responseData.Question
+            });
+        })
+    }
 
 
     const getMicrophonePermission = async () => {
@@ -106,6 +128,7 @@ const AudioRecorder = () => {
                     <button onClick={()=>setValue(value+1)} > 
                         Play Question
                     </button>
+                    <p> {data.question} </p>
                 </div>
             </main>
         </div>
