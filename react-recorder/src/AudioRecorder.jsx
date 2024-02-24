@@ -7,7 +7,7 @@ const AudioRecorder = () => {
     const [stream, setStream] = useState(null);
     const [audioChunks, setAudioChunks] = useState([]);
     const [audioURL, setAudioURL] = useState(null);
-    const [set]
+    // const [set]
 
     const getMicrophonePermission = async () => {
         if ("MediaRecorder" in window) {
