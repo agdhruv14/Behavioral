@@ -11,7 +11,6 @@ const App = () => {
             <h1>Behavioral Interview Simulator</h1>
             <div>
                 <AudioRecorder />
-                {/* <p>{data.question}</p>     */}
             </div>
         </div>
     );
