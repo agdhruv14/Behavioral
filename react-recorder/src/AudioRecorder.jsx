@@ -1,4 +1,6 @@
 import { useState, useRef } from "react";
+import { useEffect } from "react";
+import audio from "./assets/audio.webm"
 
 const AudioRecorder = () => {
     const [permission, setPermission] = useState(false);
@@ -7,7 +9,16 @@ const AudioRecorder = () => {
     const [stream, setStream] = useState(null);
     const [audioChunks, setAudioChunks] = useState([]);
     const [audioURL, setAudioURL] = useState(null);
-    // const [set]
+    const [value,setValue] = useState(0);
+
+    useEffect(()=> {
+        Play();
+    }, [value]);
+
+    const Play=() => {
+        new Audio(audio).play();
+    };
+
 
     const getMicrophonePermission = async () => {
         if ("MediaRecorder" in window) {
@@ -49,7 +60,7 @@ const AudioRecorder = () => {
             setAudioURL(audioUrl);
             const a = document.createElement("a");
             a.href = audioUrl;
-            a.download = "recording.wav"; 
+            a.download = "recording.webm"; 
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
@@ -82,11 +93,17 @@ const AudioRecorder = () => {
                         </button>
                     ) : null}
                 </div>
+        
+                <div className="audio-player">
+                    <button onClick={()=>setValue(value+1)} > 
+                        Play Question
+                    </button>
+                </div>
             </main>
         </div>
     );
 };
 
-const mimeType = "audio/wav";
+const mimeType = "audio/webm";
 
 export default AudioRecorder;
