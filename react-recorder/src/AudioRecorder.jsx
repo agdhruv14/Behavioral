@@ -7,6 +7,7 @@ const AudioRecorder = () => {
     const [stream, setStream] = useState(null);
     const [audioChunks, setAudioChunks] = useState([]);
     const [audioURL, setAudioURL] = useState(null);
+    const [set]
 
     const getMicrophonePermission = async () => {
         if ("MediaRecorder" in window) {
@@ -55,12 +56,14 @@ const AudioRecorder = () => {
             URL.revokeObjectURL(audioUrl);
             setAudioChunks([]);
             //add code to send it to server
+
+
+
         };
     };
 
     return (
         <div>
-            <h2>Audio Recorder</h2>
             <main>
                 <div className="audio-controls">
                     {!permission ? (

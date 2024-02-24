@@ -7,12 +7,7 @@ const App = () => {
 
     return (
         <div>
-            <h1>React Media Recorder</h1>
-            <div className="button-flex">
-                <button onClick={() => setRecordOption("audio")}>
-                    Record Audio
-                </button>
-            </div>
+            <h1>Behavioral Interview Simulator</h1>
             <div>
                 <AudioRecorder />
             </div>
