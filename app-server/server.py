@@ -1,8 +1,8 @@
 # Filename - server.py
  
 # Import flask and datetime module for showing date and time
-from flask import Flask
-from flask import request
+from speech_recognizer import *
+from flask import Flask, request
 import datetime
 from flask_cors import CORS, cross_origin
 from controllers.gemini_controller import query_model
@@ -27,6 +27,7 @@ def get_time():
 @cross_origin(origin='*')
 def get_questions():
     result = query_model("Can you make one behavioral interview question?").text
+    speak(result)
     text_dict = {"Question": result}
     return text_dict
 
@@ -35,7 +36,7 @@ def get_questions():
 def analyze_data():
     if request.method == 'POST':
         f = request.files['wavfile']
-        f.save('audio.wav')
+        f.save('./user_audio/audio.wav')
         return "test"
 
 # Running app

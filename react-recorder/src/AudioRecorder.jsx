@@ -1,6 +1,5 @@
 import { useState, useRef } from "react";
 import { useEffect } from "react";
-import audio from "./assets/audio.webm"
 
 const AudioRecorder = () => {
     const [permission, setPermission] = useState(false);
@@ -9,8 +8,8 @@ const AudioRecorder = () => {
     const [stream, setStream] = useState(null);
     const [audioChunks, setAudioChunks] = useState([]);
     const [audioURL, setAudioURL] = useState(null);
-    
-    
+    const [soundFile, setSoundFile] = useState(null);
+    const [src, setSrc] = useState("");
     const [data, setdata] = useState({
         question: "check"
     });
@@ -20,13 +19,15 @@ const AudioRecorder = () => {
     useEffect(()=> {
         if (value > 0) {
             Show();
-            Play();
         }
     }, [value]);
-
-    const Play=() => {
-        new Audio(audio).play();
-    };
+    
+    async function importFile() {
+        const file = await import(
+        './../../app-server/ai_audio/voice.mp3'
+        );
+        setSoundFile(file.default);
+    }
 
     //function for showing
     const Show=() => {
@@ -39,9 +40,11 @@ const AudioRecorder = () => {
             setdata({
                 question: responseData.Question
             });
+        }).then(() => {
+            console.log("importing file now");
+            importFile();
         })
     }
-
 
     const getMicrophonePermission = async () => {
         if ("MediaRecorder" in window) {
@@ -81,12 +84,6 @@ const AudioRecorder = () => {
             const audioBlob = new Blob(audioChunks, { type: mimeType });
             const audioUrl = URL.createObjectURL(audioBlob);
             setAudioURL(audioUrl);
-            // const a = document.createElement("a");
-            // a.href = audioUrl;
-            // a.download = "recording.webm"; 
-            // document.body.appendChild(a);
-            // a.click();
-            // document.body.removeChild(a);
             let data = new FormData();
             data.append('wavfile', audioBlob, "recording.wav");
     
