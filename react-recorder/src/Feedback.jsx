@@ -7,10 +7,9 @@ const Feedback=() => {
         description: "check"
     });
 
-    useEffect(() => {
         // Using fetch to fetch the api from 
         // flask server it will be redirected to proxy
-
+    const GetAnalysis=()=> {
         const fetchData=async () => {
         fetch("http://127.0.0.1:8080/analysis", {
             mode: "cors"
@@ -34,7 +33,7 @@ const Feedback=() => {
         return () => {
             document.removeEventListener('visibilitychange', handleVisibilityChange);
         };
-        }, []); 
+    };
 
     return (
         <div>
@@ -48,6 +47,7 @@ const Feedback=() => {
                 <p> Quality analysis:  </p>
                 <p>{data.description}</p>
             </div>
+            <button onclick={() => GetAnalysis()}> Feedback</button>
         </div>
     );
 };
