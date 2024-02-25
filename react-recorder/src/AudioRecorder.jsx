@@ -25,7 +25,7 @@ const AudioRecorder = () => {
     
     async function importFile() {
         const file = await import(
-        './../../app-server/ai_audio/voice.mp3'
+        './../../app-server/ai_audio/voice' + count + '.mp3'
         );
         setSoundFile(file.default);
     }
