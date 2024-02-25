@@ -13,13 +13,13 @@ const App = () => {
     };
     return (
         <div>
-            <h1>Behavioral Interview Simulator</h1>
+            <h1 className = "header">Behavioral Interview Simulator</h1>
             <div>
                 {showAudioRecorder ? <AudioRecorder /> : <Feedback />}
             </div>
             <div>
                 <button onClick={handleStateChange}>
-                    State Changer
+                    Get Feedback
                 </button>
             </div>
         </div>
