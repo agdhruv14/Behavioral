@@ -1,8 +1,8 @@
 # Filename - server.py
  
 # Import flask and datetime module for showing date and time
-from flask import Flask
-from flask import request
+from speech_recognizer import *
+from flask import Flask, request
 import datetime
 from flask_cors import CORS, cross_origin
 from controllers.gemini_controller import send_message, analyze_conversation
@@ -38,15 +38,6 @@ def analyze_data():
     if request.method == 'POST':
         f = request.files['wavfile']
         f.save('audio.wav')
-        answer = get_audio('audio.wav')
-        analysis = analyze_conversation(answer)
-        return "test"
-
-@app.route('/start', methods=['POST'])
-@cross_origin(origin='*')
-def start_session():
-    if request.method == 'POST':
-        print(request)
         return "test"
 
 @app.route('/analysis')
