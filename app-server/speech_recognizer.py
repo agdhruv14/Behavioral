@@ -3,6 +3,8 @@ import time
 import speech_recognition as sr
 from gtts import gTTS
 import wave
+import subprocess
+
 
 def speak(text):
     tts = gTTS(text=text, lang="en")
@@ -34,8 +36,9 @@ def analyze_speed(file_path, string):
 def get_audio(filepath):
     r = sr.Recognizer()
     r.energy_threshold = 4000
-    audio_file = filepath
-    with sr.AudioFile(audio_file) as source:
+    print(filepath)
+    with sr.AudioFile(filepath) as source:
+        print('AUDIO!')
         r.adjust_for_ambient_noise(source)
         print('start')
         audio = r.record(source)
@@ -43,10 +46,21 @@ def get_audio(filepath):
         print('stop')
         try:
             s = r.recognize_google(audio_data=audio)
-            analyze_speed(audio_file, s)
+            analyze_speed(filepath, s)
             return s
         except ValueError as e:
             print("speech not recognized")
         except Exception as e:
             print("Exception: "+str(e))
     return ""
+
+def convert_file(filename):
+    subprocess.run([
+        "ffmpeg", 
+        "-i",
+        "./user_audio/" + filename + ".webm",
+        "./user_audio/" + filename + ".wav",
+    ])
+
+    return "./user_audio/" + filename + ".wav"
+
