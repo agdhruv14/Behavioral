@@ -4,7 +4,7 @@ import { useEffect } from "react";
 const Feedback=() => {
 
     const [data, setdata] = useState({
-        description: "check",
+        description: "",
         speed: "0",
         tone: "neutral" 
     });
@@ -41,19 +41,16 @@ const Feedback=() => {
 
     return (
         <div>
+            <button onClick={GetAnalysis} className="play">Get Feedback</button>
             <div class="Tone">
-                <p>Tone</p>
-                <p> { data.tone } </p>
+                <p>Tone: { data.tone }</p>
             </div>
             <div class="Speed">
-                <p>Speed</p>
-                <p> { data.speed } </p>
+                <p>Speed: { data.speed }</p>
             </div>
-            <div class = "textbox"> 
-                <p> Quality analysis:  </p>
-                <p>{data.description}</p>
+            <div class="textbox"> 
+                <p> Quality analysis: {data.description}</p>
             </div>
-            <button onClick={GetAnalysis}> Feedback</button>
         </div>
     );
 };

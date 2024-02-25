@@ -35,7 +35,7 @@ main {
   background-color: #0056b3;
 }
 
-.audio-player button {
+.audio-player {
   padding: 10px 20px;
   background-color: #28a745;
   color: #fff;
@@ -43,18 +43,31 @@ main {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin: 5px;
 }
 
-.audio-player button:hover {
+.audio-player:hover {
   background-color: #218838;
 }
 
 .play {
-  background-color: blue;
-  color: white;
+  padding: 10px 20px;
+  background-color: #0048ff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 5px;
 }
 
+.play:hover {
+  background-color: #072a80;
+}
 
+.pad {
+  margin: 20px;
+}
 
 p#questionText {
   font-size: 18px;
@@ -63,13 +76,24 @@ p#questionText {
 
 .textbox {
   background-color: #FFFFFF;
-  border: 2px solid #002aff;
+  border: 2px solid #151B20;
   border-radius: 5px;
   padding: 1px;
   max-width: 500px;
-  height: 600px;
+  height: 450px;
   margin: 20px auto;
 } 
+
+.texbox2 {
+  background-color: #FFFFFF;
+  border: 2px solid #151B20;
+  border-radius: 5px;
+  padding: 1px;
+  max-width: 500px;
+  height: 450px;
+  margin: 20px auto;
+  
+}
 
 
 .chatbot-container {

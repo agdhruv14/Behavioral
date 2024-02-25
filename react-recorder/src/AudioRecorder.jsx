@@ -11,7 +11,7 @@ const AudioRecorder = () => {
     const [soundFile, setSoundFile] = useState(null);
     const [src, setSrc] = useState("");
     const [data, setdata] = useState({
-        question: "Question:"
+        question: "Your question will appear here"
     });
     const [count, setCount] = useState(0);
     
@@ -127,7 +127,7 @@ const AudioRecorder = () => {
             ) : null}
      
             <button onClick={()=>setValue(value+1)} type="button" className="play"> 
-                Play Question
+                Generate Question
             </button>
             <div class = "textbox"> 
                 <p> {data.question} </p>

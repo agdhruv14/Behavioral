@@ -57,12 +57,12 @@ def get_audio(filepath):
             s = r.recognize_google(audio_data=audio)
             speed = analyze_speed(filepath, s)
             tone = query(filepath)
-            return s, speed, 
+            return s, speed, tone
         except ValueError as e:
             print("speech not recognized")
         except Exception as e:
             print("Exception: "+str(e))
-    return ""
+    return "", None, None
 
 def convert_file(filename):
     if os.path.exists("./user_audio/" + filename + ".wav"):

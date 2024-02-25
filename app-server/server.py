@@ -14,15 +14,15 @@ x = datetime.datetime.now()
 # Initializing flask app
 app = Flask(__name__)
 
-# def delete_files_in_directory(directory):
-#     # Iterate over all files in the directory
-#     for file_name in os.listdir(directory):
-#         # Construct the full file path
-#         file_path = os.path.join(directory, file_name)
-#         # Check if it's a file (not a directory)
-#         if os.path.isfile(file_path):
-#             # Delete the file
-#             os.remove(file_path)
+def delete_files_in_directory(directory):
+    # Iterate over all files in the directory
+    for file_name in os.listdir(directory):
+        # Construct the full file path
+        file_path = os.path.join(directory, file_name)
+        # Check if it's a file (not a directory)
+        if os.path.isfile(file_path):
+            # Delete the file
+            os.remove(file_path)
 
 # Route for seeing a data
 @app.route('/data')
@@ -61,21 +61,18 @@ def get_content_analysis():
     f = open("count.txt", "r")
     count = f.read()
     f.close()
-    print("BREFORE")
     filepath = convert_file("voice" + str(count))
-    print("AFTER")
-    answer = get_audio(filepath)
-    print("HELLPPPP")
-    analysis, speed, tone = analyze_conversation(answer).text
+    answer, speed, tone = get_audio(filepath)
+    analysis = analyze_conversation(answer).text
     text_dict = {"Analysis": analysis, "Speed": speed, "Tone": tone}
     return text_dict
 
-# @app.route('/delete')
-# @cross_origin(origin='*')
-# def delete_files():
-#     delete_files_in_directory('./ai_audio')
-#     delete_files_in_directory('./user_audio')
-#     return text_dict
+@app.route('/delete')
+@cross_origin(origin='*')
+def delete_files():
+    delete_files_in_directory('./ai_audio')
+    delete_files_in_directory('./user_audio')
+    return ""
 
 # Running app
 if __name__ == '__main__':

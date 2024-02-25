@@ -7,10 +7,16 @@
 }
 
 .header {
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  color: rgb(71, 43, 5);
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: rgb(242, 241, 240);
   padding: 30px;
+  background-color:#151B20;
+  height: 200px;
 }
+
+.header img {
+  width: 300px; 
+} 
 
 body {
   margin: 0;
