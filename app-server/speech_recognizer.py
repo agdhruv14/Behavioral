@@ -60,7 +60,7 @@ def get_audio(filepath):
 
 def convert_file(filename):
     subprocess.run([
-        "ffmpeg", 
+        "ffmpeg",
         "-i",
         "./user_audio/" + filename + ".webm",
         "./user_audio/" + filename + ".wav",

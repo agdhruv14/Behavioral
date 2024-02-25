@@ -10,7 +10,6 @@ const Feedback=() => {
     useEffect(() => {
         // Using fetch to fetch the api from 
         // flask server it will be redirected to proxy
-        const fetchData=async () => {
         fetch("http://127.0.0.1:8080/analysis", {
             mode: "cors"
         }).then((res) => {
@@ -20,21 +19,9 @@ const Feedback=() => {
             setdata({
                 description: responseData.Analysis
             });
-        }) 
-        }
-        const handleVisibilityChange = () => {
-            if (!document.hidden) {
-                fetchData();
-            }
-        };
-        document.addEventListener('visibilitychange', handleVisibilityChange);
-        // Fetch data when component mounts
-        fetchData();
-        return () => {
-            document.removeEventListener('visibilitychange', handleVisibilityChange);
-        };
-        }, []); 
-               
+        })
+        }, []);
+
     return (
         <div>
             <div class="Tone">

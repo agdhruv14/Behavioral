@@ -1,6 +1,7 @@
 # Filename - server.py
  
 # Import flask and datetime module for showing date and time
+import os
 from speech_recognizer import *
 from flask import Flask, request
 import datetime
@@ -12,6 +13,16 @@ x = datetime.datetime.now()
  
 # Initializing flask app
 app = Flask(__name__)
+
+# def delete_files_in_directory(directory):
+#     # Iterate over all files in the directory
+#     for file_name in os.listdir(directory):
+#         # Construct the full file path
+#         file_path = os.path.join(directory, file_name)
+#         # Check if it's a file (not a directory)
+#         if os.path.isfile(file_path):
+#             # Delete the file
+#             os.remove(file_path)
 
 # Route for seeing a data
 @app.route('/data')
@@ -39,17 +50,29 @@ def analyze_data():
     f = request.files['wavfile']
     count = request.args.get('count')
     save_file(f, False, count)
+    f = open("count.txt", "w+")
+    f.write(count)
+    f.close()
     return ""
 
 @app.route('/analysis')
 @cross_origin(origin='*')
 def get_content_analysis():
-    count = request.args.get('count')
-    filepath = convert_file("./user_audio/voice" + str(count) + ".webm")
+    f = open("count.txt", "r")
+    count = f.read()
+    f.close()
+    filepath = convert_file("voice" + str(count))
     answer = get_audio(filepath)
     analysis = analyze_conversation(answer).text
     text_dict = {"Analysis": analysis}
     return text_dict
+
+# @app.route('/delete')
+# @cross_origin(origin='*')
+# def delete_files():
+#     delete_files_in_directory('./ai_audio')
+#     delete_files_in_directory('./user_audio')
+#     return text_dict
 
 # Running app
 if __name__ == '__main__':
