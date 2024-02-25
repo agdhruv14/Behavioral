@@ -49,20 +49,11 @@ main {
   background-color: #218838;
 }
 
-.audio-playe button {
-  padding: 10px 20px;
-  margin: 20px;
-  background-color: #6586cf;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.play {
+  background-color: blue;
+  color: white;
 }
 
-.audio-playe button:hover {
-  background-color: #22489a;
-}
 
 
 p#questionText {
