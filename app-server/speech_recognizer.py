@@ -4,13 +4,17 @@ import speech_recognition as sr
 from gtts import gTTS
 import wave
 import subprocess
+def save_file(obj, is_ai, count):
+    file_path = ""
+    if is_ai:
+        file_path = "./ai_audio/voice" + str(count) + ".mp3"
+    else:
+        file_path = "./user_audio/voice" + str(count) + ".webm"
+    obj.save(file_path)
 
-
-def speak(text):
+def speak(text, count):
     tts = gTTS(text=text, lang="en")
-    filename = "./ai_audio/voice.mp3"
-    tts.save(filename)
-    print(text)
+    save_file(tts, True, count)
 
 def get_duration_wave(file_path):
    with wave.open(file_path, 'r') as audio_file:

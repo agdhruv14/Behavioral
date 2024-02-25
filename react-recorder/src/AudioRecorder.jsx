@@ -13,6 +13,7 @@ const AudioRecorder = () => {
     const [data, setdata] = useState({
         question: "check"
     });
+    const [count, setCount] = useState(0);
     
     //Audio Playing
     const [value,setValue] = useState(0);
@@ -31,7 +32,7 @@ const AudioRecorder = () => {
 
     //function for showing
     const Show=() => {
-        fetch("http://127.0.0.1:8080/questions", {
+        fetch("http://127.0.0.1:8080/questions?count=" + count, {
             mode: "cors"
         }).then((res) => {
             return res.json();
@@ -90,10 +91,14 @@ const AudioRecorder = () => {
             const config = {
                 headers: {'content-type': 'multipart/form-data'}
             }
-            fetch('http://localhost:8080/analyze', {
+            fetch('http://localhost:8080/analyze?count='+count, {
                 method: "POST",
                 body: data,
-              }).then((res) => console.log(res.data));;
+              }).then((res) => console.log(res.data)).then(()=>{
+                console.log('count' + count);
+                setCount(count + 1);
+                console.log('count' + count);
+              });
     
             URL.revokeObjectURL(audioUrl);
             setAudioChunks([]);

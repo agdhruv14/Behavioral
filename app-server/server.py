@@ -29,20 +29,23 @@ def get_time():
 def get_questions():
     result = send_message("Ask me one behavioral question. Do not write anything except the question in your response. No headers.").text
     text_dict = {"Question": result}
+    count = request.args.get('count')
+    speak(result, count)
     return text_dict
 
 @app.route('/analyze', methods=['POST'])
 @cross_origin(origin='*')
 def analyze_data():
-    if request.method == 'POST':
-        f = request.files['wavfile']
-        f.save('./user_audio/audio.webm')
-        return "test"
+    f = request.files['wavfile']
+    count = request.args.get('count')
+    save_file(f, False, count)
+    return ""
 
 @app.route('/analysis')
 @cross_origin(origin='*')
 def get_content_analysis():
-    filepath = convert_file('audio')
+    count = request.args.get('count')
+    filepath = convert_file("./user_audio/voice" + str(count) + ".webm")
     answer = get_audio(filepath)
     analysis = analyze_conversation(answer).text
     text_dict = {"Analysis": analysis}
