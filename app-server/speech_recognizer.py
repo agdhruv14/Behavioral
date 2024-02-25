@@ -1,6 +1,6 @@
 import os
 import time
-import playsound
+# import playsound
 import speech_recognition as sr
 from gtts import gTTS
 import wave
@@ -32,10 +32,10 @@ def analyze_speed(file_path, string):
     else:
         print('Speak slower...')
 
-def get_audio():
+def get_audio(filepath):
     r = sr.Recognizer()
     r.energy_threshold = 4000
-    audio_file = './audio/recording (1).wav'
+    audio_file = filepath
     with sr.AudioFile(audio_file) as source:
         r.adjust_for_ambient_noise(source)
         print('start')
@@ -45,10 +45,9 @@ def get_audio():
         try:
             s = r.recognize_google(audio_data=audio)
             analyze_speed(audio_file, s)
-            print("Text: "+s)
+            return s
         except ValueError as e:
             print("speech not recognized")
         except Exception as e:
             print("Exception: "+str(e))
-
-get_audio()
+    return ""

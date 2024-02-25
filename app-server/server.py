@@ -5,11 +5,12 @@ from flask import Flask
 from flask import request
 import datetime
 from flask_cors import CORS, cross_origin
-from controllers.gemini_controller import send_message
+from controllers.gemini_controller import send_message, analyze_conversation
 from gemini_session import pick_q
-
+from speech_recognizer import *
 x = datetime.datetime.now()
  
+analysis = ""
 # Initializing flask app
 app = Flask(__name__)
 
@@ -27,7 +28,7 @@ def get_time():
 @app.route('/questions')
 @cross_origin(origin='*')
 def get_questions():
-    result = send_message("Can you make one behavioral interview question?").text
+    result = send_message("Ask me one behavioral question. Do not write anything except the question in your response. No headers.").text
     text_dict = {"Question": result}
     return text_dict
 
@@ -37,13 +38,21 @@ def analyze_data():
     if request.method == 'POST':
         f = request.files['wavfile']
         f.save('audio.wav')
+        answer = get_audio('audio.wav')
+        analysis = analyze_conversation(answer)
         return "test"
 
-@app.route('/session')
+@app.route('/start', methods=['POST'])
 @cross_origin(origin='*')
-def get_next_questions():
-    result = send_message("Can you make one behavioral interview question?").text
-    text_dict = {"Question": result}
+def start_session():
+    if request.method == 'POST':
+        print(request)
+        return "test"
+
+@app.route('/analysis')
+@cross_origin(origin='*')
+def get_content_analysis():
+    text_dict = {"Analysis": analysis}
     return text_dict
 
 # Running app
