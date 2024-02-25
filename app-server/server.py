@@ -5,7 +5,8 @@ from flask import Flask
 from flask import request
 import datetime
 from flask_cors import CORS, cross_origin
-from controllers.gemini_controller import query_model
+from controllers.gemini_controller import send_message
+from gemini_session import pick_q
 
 x = datetime.datetime.now()
  
@@ -26,7 +27,7 @@ def get_time():
 @app.route('/questions')
 @cross_origin(origin='*')
 def get_questions():
-    result = query_model("Can you make one behavioral interview question?").text
+    result = send_message("Can you make one behavioral interview question?").text
     text_dict = {"Question": result}
     return text_dict
 
@@ -37,6 +38,13 @@ def analyze_data():
         f = request.files['wavfile']
         f.save('audio.wav')
         return "test"
+
+@app.route('/session')
+@cross_origin(origin='*')
+def get_next_questions():
+    result = send_message("Can you make one behavioral interview question?").text
+    text_dict = {"Question": result}
+    return text_dict
 
 # Running app
 if __name__ == '__main__':
