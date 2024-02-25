@@ -11,7 +11,7 @@ const AudioRecorder = () => {
     const [soundFile, setSoundFile] = useState(null);
     const [src, setSrc] = useState("");
     const [data, setdata] = useState({
-        question: "check"
+        question: "Question:"
     });
     
     //Audio Playing
@@ -100,37 +100,34 @@ const AudioRecorder = () => {
         };
     };
 
-    return (
-        <div>
-            <main>
-                <div className="audio-player">
-                    <button onClick={()=>setValue(value+1)} > 
-                        Play Question
-                    </button>
-                    <div class = "textbox"> 
-                        <p> {data.question} </p>
-                    </div>
-                    
-                </div>
-            </main>
-            <div className="audio-controls">
-                    {!permission ? (
-                        <button onClick={getMicrophonePermission} type="button">
-                            Get Microphone
-                        </button>
-                    ) : null}
-                    {permission && recordingStatus === "inactive" ? (
-                        <button onClick={startRecording} type="button">
-                            Start Recording
-                        </button>
-                    ) : null}
-                    {recordingStatus === "recording" ? (
-                        <button onClick={stopRecording} type="button">
-                            Stop Recording
-                        </button>
-                    ) : null}
-                </div>
+    return (    
+       <div className="chatbot-container">     
+        <div className="audio-controls">
+            {!permission ? (
+                <button onClick={getMicrophonePermission} type="button">
+                    Get Microphone
+                </button>
+            ) : null}
+            {permission && recordingStatus === "inactive" ? (
+                <button onClick={startRecording} type="button">
+                    Start Recording
+                </button>
+            ) : null}
+            {recordingStatus === "recording" ? (
+                <button onClick={stopRecording} type="button">
+                    Stop Recording
+                </button>
+            ) : null}
         </div>
+        <div className="audio-player">
+            <button onClick={()=>setValue(value+1)} > 
+                Play Question
+            </button>
+            <div class = "textbox"> 
+                <p> {data.question} </p>
+            </div>  
+        </div>
+    </div>
     );
 };
 

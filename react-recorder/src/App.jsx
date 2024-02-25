@@ -20,7 +20,7 @@ const App = () => {
             </div>
             <div>
                 <button onClick={handleStateChange}>
-                    State Changer
+                    Get Feedback
                 </button>
             </div>
         </div>
