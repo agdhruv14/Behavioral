@@ -5,8 +5,9 @@ from speech_recognizer import *
 from flask import Flask, request
 import datetime
 from flask_cors import CORS, cross_origin
-from controllers.gemini_controller import query_model
-
+from controllers.gemini_controller import *
+from gemini_session import pick_q
+from speech_recognizer import *
 x = datetime.datetime.now()
  
 # Initializing flask app
@@ -26,8 +27,7 @@ def get_time():
 @app.route('/questions')
 @cross_origin(origin='*')
 def get_questions():
-    result = query_model("Can you make one behavioral interview question?").text
-    speak(result)
+    result = send_message("Ask me one behavioral question. Do not write anything except the question in your response. No headers.").text
     text_dict = {"Question": result}
     return text_dict
 
@@ -36,8 +36,17 @@ def get_questions():
 def analyze_data():
     if request.method == 'POST':
         f = request.files['wavfile']
-        f.save('./user_audio/audio.wav')
+        f.save('./user_audio/audio.webm')
         return "test"
+
+@app.route('/analysis')
+@cross_origin(origin='*')
+def get_content_analysis():
+    filepath = convert_file('audio')
+    answer = get_audio(filepath)
+    analysis = analyze_conversation(answer).text
+    text_dict = {"Analysis": analysis}
+    return text_dict
 
 # Running app
 if __name__ == '__main__':

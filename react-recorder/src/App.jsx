@@ -11,7 +11,6 @@ const App = () => {
     const handleStateChange = () => {
         setShowAudioRecorder(!showAudioRecorder);
     };
-
     return (
         <div>
             <h1>Behavioral Interview Simulator</h1>
