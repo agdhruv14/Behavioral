@@ -4,7 +4,9 @@ import { useEffect } from "react";
 const Feedback=() => {
 
     const [data, setdata] = useState({
-        description: "check"
+        description: "check",
+        speed: "0",
+        tone: "neutral" 
     });
 
         // Using fetch to fetch the api from 
@@ -18,7 +20,9 @@ const Feedback=() => {
         })
         .then((responseData) => {
             setdata({
-                description: responseData.Analysis
+                description: responseData.Analysis,
+                speed: responseData.Speed,
+                tone: responseData.Tone
             });
         }) 
         }
@@ -39,9 +43,11 @@ const Feedback=() => {
         <div>
             <div class="Tone">
                 <p>Tone</p>
+                <p> { data.tone } </p>
             </div>
             <div class="Speed">
                 <p>Speed</p>
+                <p> { data.speed } </p>
             </div>
             <div class = "textbox"> 
                 <p> Quality analysis:  </p>

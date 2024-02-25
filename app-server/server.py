@@ -67,7 +67,7 @@ def get_content_analysis():
     answer = get_audio(filepath)
     print("HELLPPPP")
     analysis, speed, tone = analyze_conversation(answer).text
-    text_dict = {"Analysis": analysis}
+    text_dict = {"Analysis": analysis, "Speed": speed, "Tone": tone}
     return text_dict
 
 # @app.route('/delete')

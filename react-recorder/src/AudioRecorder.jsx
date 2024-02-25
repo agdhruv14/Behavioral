@@ -108,20 +108,20 @@ const AudioRecorder = () => {
     return (    
        <div className="chatbot-container">     
         
-        <div className="audio-player">
+        <div >
         
             {!permission ? (
-                <button onClick={getMicrophonePermission} type="button">
+                <button onClick={getMicrophonePermission} type="button" className="audio-player">
                     Get Microphone
                 </button>
             ) : null}
             {permission && recordingStatus === "inactive" ? (
-                <button onClick={startRecording} type="button">
+                <button onClick={startRecording} type="button" className="audio-player">
                     Start Recording
                 </button>
             ) : null}
             {recordingStatus === "recording" ? (
-                <button onClick={stopRecording} type="button">
+                <button onClick={stopRecording} type="button" className="audio-player">
                     Stop Recording
                 </button>
             ) : null}
