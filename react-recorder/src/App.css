@@ -8,4 +8,15 @@
 
 .header {
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: rgb(71, 43, 5);
+  padding: 30px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 1500px;
+  background-color: #151B20;
+  background-image: url('./download.png');
 }

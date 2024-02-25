@@ -7,9 +7,11 @@ import Feedback from "../src/Feedback"
 
 const App = () => {
     const [showAudioRecorder, setShowAudioRecorder] = useState(true);
+    const [text, setText] = useState('Get Feedback');
 
     const handleStateChange = () => {
         setShowAudioRecorder(!showAudioRecorder);
+        setText(text === 'Get Feedback' ? 'Go back' : 'Get Feedback');
     };
     return (
         <div>
@@ -19,7 +21,7 @@ const App = () => {
             </div>
             <div>
                 <button onClick={handleStateChange}>
-                    Get Feedback
+                    {text}
                 </button>
             </div>
         </div>

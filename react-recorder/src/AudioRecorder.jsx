@@ -102,7 +102,9 @@ const AudioRecorder = () => {
 
     return (    
        <div className="chatbot-container">     
-        <div className="audio-playe">
+        
+        <div className="audio-player">
+        
             {!permission ? (
                 <button onClick={getMicrophonePermission} type="button">
                     Get Microphone
@@ -118,9 +120,8 @@ const AudioRecorder = () => {
                     Stop Recording
                 </button>
             ) : null}
-        </div>
-        <div className="audio-player">
-            <button onClick={()=>setValue(value+1)} > 
+     
+            <button onClick={()=>setValue(value+1)} type="button" className="play"> 
                 Play Question
             </button>
             <div class = "textbox"> 
