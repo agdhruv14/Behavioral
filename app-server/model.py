@@ -8,6 +8,3 @@ def query(filename):
         data = f.read()
     response = requests.post(API_URL, headers=headers, data=data)
     return response.json()
-
-output = query("audio/recording.wav")
-print(output)

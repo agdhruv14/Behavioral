@@ -61,9 +61,12 @@ def get_content_analysis():
     f = open("count.txt", "r")
     count = f.read()
     f.close()
+    print("BREFORE")
     filepath = convert_file("voice" + str(count))
+    print("AFTER")
     answer = get_audio(filepath)
-    analysis = analyze_conversation(answer).text
+    print("HELLPPPP")
+    analysis, speed, tone = analyze_conversation(answer).text
     text_dict = {"Analysis": analysis}
     return text_dict
 

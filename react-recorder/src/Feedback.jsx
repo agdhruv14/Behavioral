@@ -47,7 +47,7 @@ const Feedback=() => {
                 <p> Quality analysis:  </p>
                 <p>{data.description}</p>
             </div>
-            <button onclick={() => GetAnalysis()}> Feedback</button>
+            <button onClick={GetAnalysis}> Feedback</button>
         </div>
     );
 };

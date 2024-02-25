@@ -4,6 +4,8 @@ import speech_recognition as sr
 from gtts import gTTS
 import wave
 import subprocess
+from model import *
+
 def save_file(obj, is_ai, count):
     file_path = ""
     if is_ai:
@@ -32,10 +34,13 @@ def analyze_speed(file_path, string):
     print('Rate: ' + str(rate))
     if rate >= 140 and rate <= 160:
         print('Perfect speed!')
+        return 'neutral'
     elif rate < 140:
         print('Speak faster...')
+        return 'slow'
     else:
         print('Speak slower...')
+        return 'fast'
 
 def get_audio(filepath):
     r = sr.Recognizer()
@@ -50,8 +55,9 @@ def get_audio(filepath):
         print('stop')
         try:
             s = r.recognize_google(audio_data=audio)
-            analyze_speed(filepath, s)
-            return s
+            speed = analyze_speed(filepath, s)
+            tone = query(filepath)
+            return s, speed, 
         except ValueError as e:
             print("speech not recognized")
         except Exception as e:
@@ -59,6 +65,8 @@ def get_audio(filepath):
     return ""
 
 def convert_file(filename):
+    if os.path.exists("./user_audio/" + filename + ".wav"):
+        return "./user_audio/" + filename + ".wav"
     subprocess.run([
         "ffmpeg",
         "-i",
