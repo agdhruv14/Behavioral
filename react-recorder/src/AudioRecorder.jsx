@@ -103,7 +103,17 @@ const AudioRecorder = () => {
     return (
         <div>
             <main>
-                <div className="audio-controls">
+                <div className="audio-player">
+                    <button onClick={()=>setValue(value+1)} > 
+                        Play Question
+                    </button>
+                    <div class = "textbox"> 
+                        <p> {data.question} </p>
+                    </div>
+                    
+                </div>
+            </main>
+            <div className="audio-controls">
                     {!permission ? (
                         <button onClick={getMicrophonePermission} type="button">
                             Get Microphone
@@ -120,14 +130,6 @@ const AudioRecorder = () => {
                         </button>
                     ) : null}
                 </div>
-        
-                <div className="audio-player">
-                    <button onClick={()=>setValue(value+1)} > 
-                        Play Question
-                    </button>
-                    <p> {data.question} </p>
-                </div>
-            </main>
         </div>
     );
 };
